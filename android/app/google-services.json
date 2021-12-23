@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "72959749880",
+    "project_id": "monolearn-241ca",
+    "storage_bucket": "monolearn-241ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72959749880:android:0204a2a289a7c352a1d50d",
+        "android_client_info": {
+          "package_name": "com.maro.mono_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72959749880-t3trhramd4tifj7giguajeq526orbvge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maro.mono_learn",
+            "certificate_hash": "fc8c0dd4145d605448bb2f08fdafc1fa5b9326f0"
+          }
+        },
+        {
+          "client_id": "72959749880-4v8m0b7ha5894pl5p27pagt9ma9o4vhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUgPsBvdfstxflx-r2XPhuT5twIsBD8UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72959749880-4v8m0b7ha5894pl5p27pagt9ma9o4vhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
