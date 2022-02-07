@@ -1,16 +1,24 @@
-# mono_learn
+# Monolearn
 
-Your personal tutor
+Monolearn is a platform that makes learning easy and fun. 
+The idea of monolearn is to enable users learn basic concepts with ease and get tested as they learn
+## Features
 
-## Getting Started
+The project uses the following
 
-This project is a starting point for a Flutter application.
+* Firebase Authentication for user registration and authentication,
+* Firebase Realtime database,
+* Provider for state management.
 
-A few resources to get you started if this is your first Flutter project:
+Users are allowed to:
+* Register new accounts after which a verification email is sent to them.
+* Login once their email address has been verified.
+* Update user details such as: username, password, email, etc.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<img src="./one.jpg">
+<img src="./two.jpg">
+<img src="./three.jpg">
+<img src="./four.jpg">
+<img src="./five.jpg">
+<img src="./six.jpg">
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

@@ -9,6 +9,7 @@ class TFormField extends StatelessWidget {
     required this.obscure,
     required this.inputType,
     this.icon,
+    this.controller,
     this.suffixIcon,
     required this.onTap,
     required this.textCapitalization,
@@ -21,6 +22,7 @@ class TFormField extends StatelessWidget {
   final IconData? icon;
   final IconData? suffixIcon;
   final Function() onTap;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class TFormField extends StatelessWidget {
             enabledBorder: kOutlineBorder,
             focusedBorder: kOutlineBorder,
           ),
+          controller: controller,
         ),
       ),
     );

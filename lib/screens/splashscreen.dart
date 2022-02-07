@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mono_learn/screens/welcome_page.dart';
+import 'package:mono_learn/tools/database_service.dart';
+import 'package:mono_learn/tools/wrapper.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'auth/login.dart';
@@ -16,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<DatabaseService>(context, listen: false).getQuestions();
     return Scaffold(
       body: Center(
         child: Text(
@@ -44,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (firstTime != null && !firstTime) {
       // Not first time
-      return new Timer(_duration, navigationPageLogin);
+      return new Timer(_duration, navigationWrapper);
     } else {
       // First time
       prefs.setBool('first_time', false);
@@ -58,9 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navigator.of(context).pushReplacementNamed('welcomePage');
   }
 
-  void navigationPageLogin() {
+  void navigationWrapper() {
     Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+        MaterialPageRoute(builder: (BuildContext context) => Wrapper()));
 
     // Navigator.of(context).pushReplacementNamed('loginPage');
   }

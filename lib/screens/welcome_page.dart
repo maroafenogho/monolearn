@@ -4,6 +4,7 @@ import 'package:mono_learn/screens/auth/email_auth_screen.dart';
 import 'package:mono_learn/utils/constants.dart';
 import 'package:mono_learn/widgets/button.dart';
 
+import 'auth/login.dart';
 import 'auth/phone_auth_screen.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -49,64 +50,6 @@ class _WelcomePageState extends State<WelcomePage> {
               const SizedBox(height: 10.0),
               Button(
                 buttonText: 'Register with phone',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => PhoneAuthScreen(),
-                    ),
-                  );
-                },
-                color: kBackButton,
-                textColor: kMainColor,
-                borderColor: kMainColor,
-                borderRadius: 0.0,
-                buttonHeight: 20.0,
-              ),
-            ],
-          )),
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialog;
-        });
-  }
-
-  void _loginOption() {
-    AlertDialog dialog = AlertDialog(
-      content: Container(
-          width: 260.0,
-          height: 200,
-          decoration: const BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Color(0x00ffffff),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // const SizedBox(height: 40.0),
-              Button(
-                buttonText: 'Login with email',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => SignUp(),
-                    ),
-                  );
-                },
-                color: kBackButton,
-                textColor: kMainColor,
-                borderColor: kMainColor,
-                borderRadius: 0.0,
-                buttonHeight: 20.0,
-              ),
-              const SizedBox(height: 10.0),
-              Button(
-                buttonText: 'Login with phone',
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -189,7 +132,14 @@ class _WelcomePageState extends State<WelcomePage> {
                   flex: 1,
                   child: Button(
                     buttonText: 'Login',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage(),
+                        ),
+                      );
+                    },
                     color: kMainColor,
                     textColor: Colors.white,
                     borderColor: kMainColor,

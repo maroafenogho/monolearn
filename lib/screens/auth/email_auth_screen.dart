@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mono_learn/screens/auth/phone_auth_screen.dart';
+import 'package:mono_learn/tools/auth_service.dart';
 import 'package:mono_learn/utils/constants.dart';
 import 'package:mono_learn/widgets/button.dart';
 import 'package:mono_learn/widgets/button_login.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/edit_text.dart';
 import 'login.dart';
@@ -70,6 +72,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+     final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: kMainColor,
       body: SafeArea(
@@ -331,7 +334,7 @@ class _SignUpState extends State<SignUp> {
                                                   color: Colors.white,
                                                 ),
                                               ),
-                                        onPressed: () async {
+                                        onPressed: ()  {
                                           if (email.isNotEmpty &&
                                               firstName.isNotEmpty &&
                                               lastName.isNotEmpty &&
@@ -341,10 +344,10 @@ class _SignUpState extends State<SignUp> {
                                               isLoading = true;
                                             });
                                             try {
-                                              await auth
+                                               authService
                                                   .createUserWithEmailAndPassword(
-                                                      email: email,
-                                                      password: password)
+                                                       email,
+                                                      password)
                                                   .then((value) {
                                                 auth.currentUser
                                                     ?.updateDisplayName(

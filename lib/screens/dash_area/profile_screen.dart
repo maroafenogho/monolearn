@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mono_learn/utils/constants.dart';
 
@@ -29,14 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     getData();
   }
 
-  void _setUpFirebaseAuth() {
-    User? firebaseUser = auth.currentUser;
-    auth.authStateChanges().listen((event) {
-      if (firebaseUser == null) {}
-    });
-  }
-
-  FirebaseDatabase _firebaseDatabase = FirebaseDatabase.instance;
+  // FirebaseDatabase _firebaseDatabase = FirebaseDatabase.instance;
   DatabaseReference dbRef = FirebaseDatabase.instance.reference();
 
   void getData() async {

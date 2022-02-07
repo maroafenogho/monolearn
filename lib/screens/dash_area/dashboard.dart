@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mono_learn/screens/dash_area/buddies.dart';
 import 'package:mono_learn/screens/dash_area/discover.dart';
 import 'package:mono_learn/screens/dash_area/profile_screen.dart';
+import 'package:mono_learn/screens/dash_area/quest.dart';
 import 'package:mono_learn/screens/dash_area/settings.dart';
 import 'package:mono_learn/utils/constants.dart';
 
@@ -13,11 +14,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
   static const List<Widget> _widgetOptions = <Widget>[
     Buddies(),
     DiscoverScreen(),
     ProfileScreen(),
+    QuestionPage(),
     SettingsScreen(),
   ];
 
@@ -52,6 +54,11 @@ class _DashboardState extends State<Dashboard> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Quest',
+            tooltip: 'quest',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

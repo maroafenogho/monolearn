@@ -5,10 +5,13 @@ import 'package:mono_learn/screens/auth/phone_login.dart';
 import 'package:mono_learn/screens/auth/resend_verification.dart';
 import 'package:mono_learn/screens/auth/reset_password.dart';
 import 'package:mono_learn/screens/dash_area/dashboard.dart';
+import 'package:mono_learn/tools/auth_service.dart';
 import 'package:mono_learn/utils/constants.dart';
 import 'package:mono_learn/widgets/button_login.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/edit_text.dart';
+import '../json_test_page.dart';
 import 'email_auth_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,41 +22,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isVisible = false;
-  void toggleVisibility() {
-    setState(() {
-      isVisible = !isVisible;
-    });
-  }
-
-  FirebaseDatabase firebaseDatabase = FirebaseDatabase.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
   String email = "";
   String password = "";
 
-  bool? isLoading = false;
-
-  void _setUpFirebaseAuth() {
-    User? firebaseUser = auth.currentUser;
-    auth.authStateChanges().listen((event) {
-      if (firebaseUser != null) {
-        showSnackBar('Authenticated with ${firebaseUser.email}');
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => Dashboard(),
-          ),
-        );
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _setUpFirebaseAuth();
-  }
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -70,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: kMainColor,
       body: Center(
@@ -135,16 +110,17 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               labelText: 'Password',
                               textCapitalization: TextCapitalization.none,
-                              obscure: isVisible ? false : true,
+                              obscure: authService.isVisible ? false : true,
                               inputType: TextInputType.text,
                               icon: Icons.lock,
-                              suffixIcon: isVisible == false
+                              suffixIcon: authService.isVisible == false
                                   ? Icons.visibility_off_sharp
                                   : Icons.visibility_sharp,
                               onTap: () {
-                                setState(() {
-                                  toggleVisibility();
-                                });
+                                authService.toggleVisibility();
+                                // setState(() {
+                                //   authService.toggleVisibility();
+                                // });
                               },
                             ),
                             ButtonLogin(
@@ -162,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Colors.white,
                                       ),
                                     ),
-                              onPressed: () async {
+                              onPressed: () {
                                 if (email.isEmpty || password.isEmpty) {
                                   showSnackBar("Please fill required fields");
                                 }
@@ -171,11 +147,11 @@ class _LoginPageState extends State<LoginPage> {
                                     isLoading = true;
                                   });
                                   try {
-                                    await auth
+                                    authService
                                         .signInWithEmailAndPassword(
-                                            email: email, password: password)
-                                        .then((result) {
-                                      if (result.user!.emailVerified) {
+                                            email, password)
+                                        .then((user) {
+                                      if (user!.emailVerified) {
                                         Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
@@ -183,14 +159,17 @@ class _LoginPageState extends State<LoginPage> {
                                                 Dashboard(),
                                           ),
                                         );
+                                        setState(() {
+                                          isLoading = false;
+                                        });
                                         showSnackBar('Login Successful');
                                       } else {
                                         auth.signOut();
                                         showSnackBar("Please Verify Email");
+                                        setState(() {
+                                          isLoading = false;
+                                        });
                                       }
-                                      setState(() {
-                                        isLoading = false;
-                                      });
                                     }).onError((error, stackTrace) {
                                       showSnackBar(error.toString());
                                       setState(() {
@@ -287,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        PhoneLogin(),
+                                        JsonTestPage(),
                                   ),
                                 );
                               },

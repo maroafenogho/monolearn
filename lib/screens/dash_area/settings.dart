@@ -4,9 +4,11 @@ import 'package:mono_learn/screens/auth/change_email.dart';
 import 'package:mono_learn/screens/auth/change_password.dart';
 import 'package:mono_learn/screens/auth/change_username.dart';
 import 'package:mono_learn/screens/auth/login.dart';
+import 'package:mono_learn/tools/auth_service.dart';
 import 'package:mono_learn/tools/update_interests.dart';
 import 'package:mono_learn/tools/update_profile_image.dart';
 import 'package:mono_learn/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -110,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text('Logout'),
             iconColor: kMainColor,
             onTap: () {
-              auth.signOut().then((value) => Navigator.pushReplacement(
+              authService.signOut().then((value) => Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => LoginPage(),
